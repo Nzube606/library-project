@@ -67,6 +67,7 @@ myLibrary.push(book); // push the new book object to the library array with info
       })
 
       const cancelBtn = dialog.querySelector('.cancel');
+      cancelBtn.classList.add('cancelBtn');
       cancelBtn.addEventListener('click', () => { // event listener to close dialog modal
         dialog.close();
         form.reset() ;  // resets all the input and radio values when cancelled.
@@ -78,19 +79,28 @@ myLibrary.push(book); // push the new book object to the library array with info
       })
 
       const addBookBtn = dialog.querySelector('.add');
+      addBookBtn.classList.add('addBookBtn');
       addBookBtn.addEventListener('click', () => { // event listener for the add book button
         const title = dialog.querySelector('#title').value;
         const author = dialog.querySelector('#author').value;
         const page = dialog.querySelector('#pages').value;
         const read = document.querySelector('input[name="read"]:checked');
 
-        if(read){ // display the selected value
-          addBookToLibrary(title, author, page, read.value);
+        if(form.checkValidity()) { // this is to check user Input via the 'required' atrribute in html
+          // if form is valid, it proceeds with the rest
+
+          if(read){ // display the selected value
+            addBookToLibrary(title, author, page, read.value);
+          }
+          else { // display when no value is selected
+            const selectedValue = "None selected";
+            addBookToLibrary(title, author, page, selectedValue);
+          }
         }
-        else { // display when no value is selected
-          const selectedValue = "None selected";
-          addBookToLibrary(title, author, page, selectedValue);
+        else {
+          e.target.reportValidity(); // if the required fields aren't filled it displays pop-up
         }
+
         
         displayLibrary(); // call the library function to show the book(s) when book(s) is added.
         dialog.close();
