@@ -1,18 +1,46 @@
+@font-face {
+    font-family: 'Bristle Radiant DEMO VERSION';
+    src: url('Fonts/BristleRadiantDEMOVERSION.woff2') format('woff2'),
+        url('Fonts/BristleRadiantDEMOVERSION.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Stockport Brush Personal';
+    src: url('Fonts/StockportBrushPersonal.woff2') format('woff2'),
+        url('Fonts/StockportBrushPersonal.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Philosopher';
+    src: url('Fonts/Philosopher-Bold.woff2') format('woff2'),
+        url('Fonts/Philosopher-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+html {
+    font-family: 'Philosopher';
+}
+
 body {
     width: 100vw;
     height: 100vh;
     background-image: url(Images/Library.jpg);
-    background-color: rgba(236, 150, 37, 0.349);
+    background-color: rgba(223, 185, 137, 0.349);
     background-size: contain;
     background-position: center;
     margin: 0px;
     display: grid;
     grid-template-rows: 20% 80% ;
-    /* background-repeat: no-repeat; */
-
 }
 .header {
-    /* border: 2px solid yellow; */
      background-color: rgba(0, 0, 0, 0.5);
     margin-top: 15px;
     display: grid;
@@ -26,7 +54,8 @@ body {
     fill: currentColor;
     color: white;
     margin-left: 10px;
-    font-size: 1.8rem;
+    font-size: 2rem;
+    font-family: 'Stockport Brush Personal';
 }
 
 
@@ -60,24 +89,38 @@ body {
     content: "➕"
 }
 .library {
-    /* border: 2px solid brown; */
     display: grid;
-    grid-template-columns: repeat(auto-fit, 30%);
-    gap: 15px;
-    /* height: 100vh; */
+    grid-template-columns: repeat(auto-fit, 22%);
+    grid-auto-rows: 80%;
+    gap: 25px;
     width: 100vw;
+    margin:5px 0 ;
+    justify-content: center;
 }
 
 .libraryCard {
-    border: 2px solid yellow;
-    /* width: 50px; */
+    width: 100%;
     display: grid;
-    white-space: pre-line; /* preserves line breaks */
-    padding: 10px; 
-    border-radius: 15px;
+    grid-template-columns: minmax(130px, 100%);
+    border-radius: 30px;
+  background-color:  rgba(0, 0, 0, 0.9); /*  transparent */
+  color: white;
+  font-weight: bold;
+
+}
+
+.libraryCard p,
+h3 {
+    margin: 0;
+    padding: 15px 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.libraryCard button {
+    padding: 5px 20px;
+    margin-bottom: 10px;
 }
 dialog {
-    /* border: 2px solid red; */
     border-radius: 10px;
     background-image: url(Images/woman-in-library.jpg);
     background-color: white;
@@ -87,8 +130,24 @@ dialog {
 }
 .removeBtn,
  .toggleBtn{
-    place-self: center;
-    margin-top: 10px;
+    justify-self: center;
+    margin-bottom: 20px;
+    border-radius: 18px;
+    width: 50%;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border: none;
+}
+.removeBtn {
+    background-color: red;
+    color: white;
+}
+.removeBtn:hover {
+    background-color: rgb(219, 2, 2);
+}
+.toggleBtn {
+    background-color: rgb(196, 195, 195);
+    color: black;
 }
 
 input[type='text'],
@@ -98,6 +157,7 @@ input[type='number'] {
     padding: 5px;
     border: 2px solid white;
     font-size: 0.8em;
+
 }
 input[type='text']:focus,
 input[type='number']:focus {
@@ -136,6 +196,4 @@ label[for='read-status'] {
 .addBookBtn:hover {
     background-color: rgb(9, 187, 9);
 }
-.cardDiv {
-    display: grid;
-}
+
