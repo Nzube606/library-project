@@ -36,7 +36,6 @@ body {
     background-color: rgba(223, 185, 137, 0.349);
     background-size: cover;
     background-attachment: fixed;
-    /* background-position: center; */
     margin: 0px;
     display: grid;
     grid-template-rows: 20% 80% ;

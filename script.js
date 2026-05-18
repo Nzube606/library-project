@@ -96,28 +96,45 @@ const addBookBtn = dialog.querySelector(".add");
 addBookBtn.classList.add("addBookBtn");
 addBookBtn.addEventListener("click", () => {
   // event listener for the add book button
-  const title = dialog.querySelector("#title").value;
-  const author = dialog.querySelector("#author").value;
-  const page = dialog.querySelector("#pages").value;
-  const read = document.querySelector('input[name="read"]:checked');
-
-  if (form.checkValidity()) {
-    // this is to check user Input via the 'required' atrribute in html
-    // if form is valid, it proceeds with the rest
-
-    if (read) {
-      // display the selected value
-      addBookToLibrary(title, author, page, read.value);
-    } else {
-      // display when no value is selected
-      const selectedValue = "None selected";
-      addBookToLibrary(title, author, page, selectedValue);
-    }
-  } else {
-    e.target.reportValidity(); // if the required fields aren't filled it displays pop-up
-  }
-
-  displayLibrary(); // call the library function to show the book(s) when book(s) is added.
+  validateInput(); // to validate the input and add book to library.
+  displayLibrary(); // call the library function to show the book(s) when it is added.
   dialog.close();
   form.reset(); // resets all the input and radio values when a book is added to start form input afresh.
 });
+
+function validateInput() {
+  // function to validate input and add to library
+  const title = dialog.querySelector("#title");
+  const author = dialog.querySelector("#author");
+  const page = dialog.querySelector("#pages");
+  const read = document.querySelector('input[name="read"]:checked');
+
+  if (title.validity.valueMissing) {
+    // this is to check user title Input
+    title.setCustomValidity("The title cannot be empty");
+    preventDefault();
+  } else {
+    title.setCustomValidity(""); // if there's a value, continue.
+  }
+  if (author.validity.valueMissing) {
+    author.setCustomValidity("Author's name cannot be empty");
+    preventDefault();
+  } else {
+    author.setCustomValidity("");
+  }
+  if (page.validity.valueMissing) {
+    page.setCustomValidity("Page number cannot be empty");
+    preventDefault();
+  } else {
+    page.setCustomValidity("");
+  }
+  let selectedValue;
+  if (read) {
+    // if the read radio button is marked
+    selectedValue = read.value;
+  } else {
+    // display when no value is selected
+    selectedValue = "None selected";
+  }
+  addBookToLibrary(title.value, author.value, page.value, selectedValue);
+}
